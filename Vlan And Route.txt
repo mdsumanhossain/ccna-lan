@@ -1,0 +1,1611 @@
+Switch>enable 
+Switch#configure terminal 
+Switch(config)#hostname Sw1
+
+Sw1(config)#no ip domain-lookup 
+
+Sw1(config)#line console 0
+Sw1(config-line)#exec-timeout 0
+Sw1(config-line)#exit
+
+Sw1(config)#vlan 10
+Sw1(config-vlan)#name IT
+Sw1(config-vlan)#exit
+
+Sw1(config)#vlan 20
+Sw1(config-vlan)#name HR
+Sw1(config-vlan)#exit
+
+Sw1(config)#vlan 30
+Sw1(config-vlan)#name Accounts
+Sw1(config-vlan)#exit
+
+Sw1(config)#interface range fastEthernet 0/1-2
+Sw1(config-if-range)#switchport mode access 
+Sw1(config-if-range)#switchport access vlan 10
+Sw1(config-if-range)#exit
+
+Sw1(config)#interface range fastEthernet 0/3-4
+Sw1(config-if-range)#switchport mode access 
+Sw1(config-if-range)#switchport access vlan 20
+Sw1(config-if-range)#exit
+
+Sw1(config)#interface range fastEthernet 0/5-6
+Sw1(config-if-range)#switchport mode access 
+Sw1(config-if-range)#switchport access vlan 30
+Sw1(config-if-range)#exit
+
+Sw1(config)#interface range fastEthernet 0/8 , gigabitEthernet 0/1
+Sw1(config-if-range)#switchport mode trunk 
+Sw1(config-if-range)#switchport trunk allowed vlan all 
+Sw1(config-if-range)#end
+Sw1#write 
+
+Sw1#show vlan brief 
+
+VLAN Name                             Status    Ports
+---- -------------------------------- --------- -------------------------------
+1    default                          active    Fa0/7, Fa0/8, Fa0/9, Fa0/10
+                                                Fa0/11, Fa0/12, Fa0/13, Fa0/14
+                                                Fa0/15, Fa0/16, Fa0/17, Fa0/18
+                                                Fa0/19, Fa0/20, Fa0/21, Fa0/22
+                                                Fa0/23, Fa0/24, Gig0/1, Gig0/2
+10   IT                               active    Fa0/1, Fa0/2
+20   HR                               active    Fa0/3, Fa0/4
+30   Accounts                         active    Fa0/5, Fa0/6
+1002 fddi-default                     active    
+1003 token-ring-default               active    
+1004 fddinet-default                  active    
+1005 trnet-default                    active  
+
+
+
+Switch>enable 
+Switch#configure terminal 
+Switch(config)#hostname Sw2
+Sw2(config)#no ip domain-lookup 
+
+Sw2(config)#line console 0
+Sw2(config-line)#exec-timeout 0
+Sw2(config-line)#exit
+
+Sw2(config)#vlan 10
+Sw2(config-vlan)#name IT
+Sw2(config-vlan)#exit
+
+Sw2(config)#vlan 20
+Sw2(config-vlan)#name HR
+Sw2(config-vlan)#exit
+
+Sw2(config)#vlan 30
+Sw2(config-vlan)#name Accounts
+Sw2(config-vlan)#exit
+
+Sw2(config)#interface range fastEthernet 0/1-2
+Sw2(config-if-range)#switchport mode access 
+Sw2(config-if-range)#switchport access vlan 10
+Sw2(config-if-range)#exit
+
+Sw2(config)#interface range fastEthernet 0/3-4
+Sw2(config-if-range)#switchport mode access 
+Sw2(config-if-range)#switchport access vlan 20
+Sw2(config-if-range)#exit
+
+Sw2(config)#interface range fastEthernet 0/5-6
+Sw2(config-if-range)#switchport mode access 
+Sw2(config-if-range)#switchport access vlan 30
+Sw2(config-if-range)#exit
+
+Sw2(config)#interface fastEthernet 0/7
+Sw2(config-if)#switchport mode trunk 
+Sw2(config-if)#switchport trunk allowed vlan all 
+Sw2(config-if)#end
+Sw2#write 
+
+Sw2#show vlan brief 
+
+VLAN Name                             Status    Ports
+---- -------------------------------- --------- -------------------------------
+1    default                          active    Fa0/8, Fa0/9, Fa0/10, Fa0/11
+                                                Fa0/12, Fa0/13, Fa0/14, Fa0/15
+                                                Fa0/16, Fa0/17, Fa0/18, Fa0/19
+                                                Fa0/20, Fa0/21, Fa0/22, Fa0/23
+                                                Fa0/24, Gig0/1, Gig0/2
+10   IT                               active    Fa0/1, Fa0/2
+20   HR                               active    Fa0/3, Fa0/4
+30   Accounts                         active    Fa0/5, Fa0/6
+1002 fddi-default                     active    
+1003 token-ring-default               active    
+1004 fddinet-default                  active    
+1005 trnet-default                    active    
+
+Sw2#show interfaces fastEthernet 0/7 switchport 
+Name: Fa0/7
+Switchport: Enabled
+Administrative Mode: trunk
+Operational Mode: trunk
+Administrative Trunking Encapsulation: dot1q
+Operational Trunking Encapsulation: dot1q
+Negotiation of Trunking: On
+Access Mode VLAN: 1 (default)
+Trunking Native Mode VLAN: 1 (default)
+Voice VLAN: none
+Administrative private-vlan host-association: none
+Administrative private-vlan mapping: none
+Administrative private-vlan trunk native VLAN: none
+Administrative private-vlan trunk encapsulation: dot1q
+Administrative private-vlan trunk normal VLANs: none
+Administrative private-vlan trunk private VLANs: none
+Operational private-vlan: none
+Trunking VLANs Enabled: All
+Pruning VLANs Enabled: 2-1001
+Capture Mode Disabled
+Capture VLANs Allowed: ALL
+Protected: false
+Unknown unicast blocked: disabled
+Unknown multicast blocked: disabled
+Appliance trust: none
+
+
+Sw1#show interfaces fastEthernet 0/7 switchport 
+Name: Fa0/7
+Switchport: Enabled
+Administrative Mode: dynamic auto
+Operational Mode: trunk
+Administrative Trunking Encapsulation: dot1q
+Operational Trunking Encapsulation: dot1q
+Negotiation of Trunking: On
+Access Mode VLAN: 1 (default)
+Trunking Native Mode VLAN: 1 (default)
+Voice VLAN: none
+Administrative private-vlan host-association: none
+Administrative private-vlan mapping: none
+Administrative private-vlan trunk native VLAN: none
+Administrative private-vlan trunk encapsulation: dot1q
+Administrative private-vlan trunk normal VLANs: none
+Administrative private-vlan trunk private VLANs: none
+Operational private-vlan: none
+Trunking VLANs Enabled: All
+Pruning VLANs Enabled: 2-1001
+Capture Mode Disabled
+Capture VLANs Allowed: ALL
+Protected: false
+Unknown unicast blocked: disabled
+Unknown multicast blocked: disabled
+Appliance trust: none
+
+Router>enable 
+Router#configure terminal 
+Router(config)#hostname R1
+
+R1(config)#no ip domain-lookup 
+
+R1(config)#line console 0
+R1(config-line)#exec-timeout 0
+R1(config-line)#exit
+
+R1(config)#interface gigabitEthernet 0/0
+R1(config-if)#no shutdown 
+R1(config-if)#exit
+
+R1(config)#interface gigabitEthernet 0/0.10
+R1(config-subif)#encapsulation dot1Q 10
+R1(config-subif)#ip address 192.168.10.254 255.255.255.0
+R1(config-subif)#exit
+
+R1(config)#interface gigabitEthernet 0/0.20
+R1(config-subif)#encapsulation dot1Q 20
+R1(config-subif)#ip address 192.168.20.254 255.255.255.0
+R1(config-subif)#exit
+
+R1(config)#interface gigabitEthernet 0/0.30
+R1(config-subif)#encapsulation dot1Q 30
+R1(config-subif)#ip address 192.168.30.254 255.255.255.0
+R1(config-subif)#exit
+
+R1(config)#interface gigabitEthernet 0/1
+R1(config-if)#no shutdown 
+R1(config-if)#ip address 200.10.10.1 255.255.255.252
+R1(config-if)#end
+R1#write 
+
+R1#show ip interface brief 
+Interface              IP-Address      OK? Method Status                Protocol 
+GigabitEthernet0/0     unassigned      YES unset  up                    up 
+GigabitEthernet0/0.10  192.168.10.254  YES manual up                    up 
+GigabitEthernet0/0.20  192.168.20.254  YES manual up                    up 
+GigabitEthernet0/0.30  192.168.30.254  YES manual up                    up 
+GigabitEthernet0/1     200.10.10.1     YES manual up                    down 
+GigabitEthernet0/2     unassigned      YES unset  administratively down down 
+Vlan1                  unassigned      YES unset  administratively down down
+
+R1#show ip route connected 
+ C   192.168.10.0/24  is directly connected, GigabitEthernet0/0.10
+ C   192.168.20.0/24  is directly connected, GigabitEthernet0/0.20
+ C   192.168.30.0/24  is directly connected, GigabitEthernet0/0.30
+
+
+R1#show running-config | section net0/0
+interface GigabitEthernet0/0
+ no ip address
+ duplex auto
+ speed auto
+interface GigabitEthernet0/0.10
+ encapsulation dot1Q 10
+ ip address 192.168.10.254 255.255.255.0
+interface GigabitEthernet0/0.20
+ encapsulation dot1Q 20
+ ip address 192.168.20.254 255.255.255.0
+interface GigabitEthernet0/0.30
+ encapsulation dot1Q 30
+ ip address 192.168.30.254 255.255.255.0
+
+Sw1#show interfaces gigabitEthernet 0/1 switchport 
+Name: Gig0/1
+Switchport: Enabled
+Administrative Mode: trunk
+Operational Mode: trunk
+Administrative Trunking Encapsulation: dot1q
+Operational Trunking Encapsulation: dot1q
+Negotiation of Trunking: On
+Access Mode VLAN: 1 (default)
+Trunking Native Mode VLAN: 1 (default)
+Voice VLAN: none
+Administrative private-vlan host-association: none
+Administrative private-vlan mapping: none
+Administrative private-vlan trunk native VLAN: none
+Administrative private-vlan trunk encapsulation: dot1q
+Administrative private-vlan trunk normal VLANs: none
+Administrative private-vlan trunk private VLANs: none
+Operational private-vlan: none
+Trunking VLANs Enabled: All
+Pruning VLANs Enabled: 2-1001
+Capture Mode Disabled
+Capture VLANs Allowed: ALL
+Protected: false
+Unknown unicast blocked: disabled
+Unknown multicast blocked: disabled
+Appliance trust: none
+
+
+PC0 C:\>ping 192.168.10.2
+
+Pinging 192.168.10.2 with 32 bytes of data:
+
+Reply from 192.168.10.2: bytes=32 time=1ms TTL=128
+Reply from 192.168.10.2: bytes=32 time<1ms TTL=128
+Reply from 192.168.10.2: bytes=32 time<1ms TTL=128
+Reply from 192.168.10.2: bytes=32 time<1ms TTL=128
+
+Ping statistics for 192.168.10.2:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 1ms, Average = 0ms
+
+PC0 C:\>ping 192.168.10.3
+
+Pinging 192.168.10.3 with 32 bytes of data:
+
+Reply from 192.168.10.3: bytes=32 time<1ms TTL=128
+Reply from 192.168.10.3: bytes=32 time<1ms TTL=128
+Reply from 192.168.10.3: bytes=32 time<1ms TTL=128
+Reply from 192.168.10.3: bytes=32 time<1ms TTL=128
+
+Ping statistics for 192.168.10.3:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 0ms, Average = 0ms
+
+PC0 C:\>ping 192.168.20.1
+
+Pinging 192.168.20.1 with 32 bytes of data:
+
+Request timed out.
+Reply from 192.168.20.1: bytes=32 time<1ms TTL=127
+Reply from 192.168.20.1: bytes=32 time<1ms TTL=127
+Reply from 192.168.20.1: bytes=32 time<1ms TTL=127
+
+Ping statistics for 192.168.20.1:
+    Packets: Sent = 4, Received = 3, Lost = 1 (25% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 0ms, Average = 0ms
+
+PC0 C:\>ping 192.168.20.3
+
+Pinging 192.168.20.3 with 32 bytes of data:
+
+Request timed out.
+Reply from 192.168.20.3: bytes=32 time<1ms TTL=127
+Reply from 192.168.20.3: bytes=32 time<1ms TTL=127
+Reply from 192.168.20.3: bytes=32 time<1ms TTL=127
+
+Ping statistics for 192.168.20.3:
+    Packets: Sent = 4, Received = 3, Lost = 1 (25% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 0ms, Average = 0ms
+
+PC0 C:\>ping 192.168.30.2
+
+Pinging 192.168.30.2 with 32 bytes of data:
+
+Request timed out.
+Reply from 192.168.30.2: bytes=32 time<1ms TTL=127
+Reply from 192.168.30.2: bytes=32 time<1ms TTL=127
+Reply from 192.168.30.2: bytes=32 time<1ms TTL=127
+
+Ping statistics for 192.168.30.2:
+    Packets: Sent = 4, Received = 3, Lost = 1 (25% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 0ms, Average = 0ms
+
+PC0 C:\>ping 192.168.30.4
+
+Pinging 192.168.30.4 with 32 bytes of data:
+
+Request timed out.
+Reply from 192.168.30.4: bytes=32 time<1ms TTL=127
+Reply from 192.168.30.4: bytes=32 time<1ms TTL=127
+Reply from 192.168.30.4: bytes=32 time<1ms TTL=127
+
+Ping statistics for 192.168.30.4:
+    Packets: Sent = 4, Received = 3, Lost = 1 (25% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 0ms, Average = 0ms
+
+Switch>enable 
+Switch#configure terminal 
+Switch(config)#hostname Sw3
+
+Sw3(config)#no ip domain-lookup 
+
+Sw3(config)#line console 0
+Sw3(config-line)#exec-timeout 0
+Sw3(config-line)#exit
+
+Sw3(config)#vlan 40
+Sw3(config-vlan)#name Sales
+Sw3(config-vlan)#exit
+
+Sw3(config)#vlan 50
+Sw3(config-vlan)#name Development
+Sw3(config-vlan)#exit
+
+Sw3(config)#vlan 60
+Sw3(config-vlan)#name Marketing
+Sw3(config-vlan)#exit
+
+Sw3(config)#interface range fastEthernet 0/1-2
+Sw3(config-if-range)#switchport mode access 
+Sw3(config-if-range)#switchport access vlan 40
+Sw3(config-if-range)#exit
+
+Sw3(config)#interface range fastEthernet 0/3-4
+Sw3(config-if-range)#switchport mode access 
+Sw3(config-if-range)#switchport access vlan 50
+Sw3(config-if-range)#exit
+
+Sw3(config)#interface range fastEthernet 0/5-6
+Sw3(config-if-range)#switchport mode access 
+Sw3(config-if-range)#switchport access vlan 60
+Sw3(config-if-range)#exit
+
+Sw3(config)#interface fastEthernet 0/7
+Sw3(config-if)#switchport mode trunk 
+Sw3(config-if)#switchport trunk allowed vlan all 
+Sw3(config-if)#end
+Sw3#write 
+
+Sw3#show vlan brief 
+
+VLAN Name                             Status    Ports
+---- -------------------------------- --------- -------------------------------
+1    default                          active    Fa0/8, Fa0/9, Fa0/10, Fa0/11
+                                                Fa0/12, Fa0/13, Fa0/14, Fa0/15
+                                                Fa0/16, Fa0/17, Fa0/18, Fa0/19
+                                                Fa0/20, Fa0/21, Fa0/22, Fa0/23
+                                                Fa0/24, Gig0/1, Gig0/2
+40   Sales                            active    Fa0/1, Fa0/2
+50   Development                      active    Fa0/3, Fa0/4
+60   Marketing                        active    Fa0/5, Fa0/6
+1002 fddi-default                     active    
+1003 token-ring-default               active    
+1004 fddinet-default                  active    
+1005 trnet-default                    active 
+
+Switch>enable 
+Switch#configure terminal 
+Switch(config)#hostname Sw4
+
+Sw4(config)#no ip domain-lookup 
+
+Sw4(config)#line console 0
+Sw4(config-line)#exec-timeout 0
+Sw4(config-line)#exit
+
+Sw4(config)#vlan 40
+Sw4(config-vlan)#name Sales
+Sw4(config-vlan)#exit
+
+Sw4(config)#vlan 50
+Sw4(config-vlan)#name Development
+Sw4(config-vlan)#exit
+
+Sw4(config)#vlan 60
+Sw4(config-vlan)#name Marketing
+Sw4(config-vlan)#exit
+
+Sw4(config)#interface range fastEthernet 0/1-2
+Sw4(config-if-range)#switchport mode access 
+Sw4(config-if-range)#switchport access vlan 40
+Sw4(config-if-range)#exit
+
+Sw4(config)#interface range fastEthernet 0/3-4
+Sw4(config-if-range)#switchport mode access 
+Sw4(config-if-range)#switchport access vlan 50
+Sw4(config-if-range)#exit
+
+Sw4(config)#interface range fastEthernet 0/5-6
+Sw4(config-if-range)#switchport mode access 
+Sw4(config-if-range)#switchport access vlan 60
+Sw4(config-if-range)#exit
+
+Sw4(config)#interface range fastEthernet 0/7 , gigabitEthernet 0/1
+Sw4(config-if-range)#switchport mode trunk 
+Sw4(config-if-range)#switchport trunk allowed vlan all 
+Sw4(config-if-range)#end
+Sw4#write 
+
+Sw4#show vlan brief 
+
+VLAN Name                             Status    Ports
+---- -------------------------------- --------- -------------------------------
+1    default                          active    Fa0/8, Fa0/9, Fa0/10, Fa0/11
+                                                Fa0/12, Fa0/13, Fa0/14, Fa0/15
+                                                Fa0/16, Fa0/17, Fa0/18, Fa0/19
+                                                Fa0/20, Fa0/21, Fa0/22, Fa0/23
+                                                Fa0/24, Gig0/2
+40   Sales                            active    Fa0/1, Fa0/2
+50   Development                      active    Fa0/3, Fa0/4
+60   Marketing                        active    Fa0/5, Fa0/6
+1002 fddi-default                     active    
+1003 token-ring-default               active    
+1004 fddinet-default                  active    
+1005 trnet-default                    active 
+
+Sw4#show interfaces fastEthernet 0/7 switchport 
+Name: Fa0/7
+Switchport: Enabled
+Administrative Mode: trunk
+Operational Mode: trunk
+Administrative Trunking Encapsulation: dot1q
+Operational Trunking Encapsulation: dot1q
+Negotiation of Trunking: On
+Access Mode VLAN: 1 (default)
+Trunking Native Mode VLAN: 1 (default)
+Voice VLAN: none
+Administrative private-vlan host-association: none
+Administrative private-vlan mapping: none
+Administrative private-vlan trunk native VLAN: none
+Administrative private-vlan trunk encapsulation: dot1q
+Administrative private-vlan trunk normal VLANs: none
+Administrative private-vlan trunk private VLANs: none
+Operational private-vlan: none
+Trunking VLANs Enabled: All
+Pruning VLANs Enabled: 2-1001
+Capture Mode Disabled
+Capture VLANs Allowed: ALL
+Protected: false
+Unknown unicast blocked: disabled
+Unknown multicast blocked: disabled
+Appliance trust: none
+
+
+
+Router>enable 
+Router#configure terminal 
+Router(config)#hostname R2
+
+R2(config)#no ip domain-lookup 
+
+R2(config)#line console 0
+R2(config-line)#exec-timeout 0
+R2(config-line)#exit
+
+R2(config)#interface gigabitEthernet 0/0
+R2(config-if)#no shutdown 
+R2(config-if)#exit
+
+R2(config)#interface gigabitEthernet 0/0.40
+R2(config-subif)#encapsulation dot1Q 40
+R2(config-subif)#ip address 192.168.40.254 255.255.255.0
+R2(config-subif)#exit
+
+R2(config)#interface gigabitEthernet 0/0.50
+R2(config-subif)#encapsulation dot1Q 50
+R2(config-subif)#ip address 192.168.50.254 255.255.255.0
+R2(config-subif)#exit
+
+R2(config)#interface gigabitEthernet 0/0.60
+R2(config-subif)#encapsulation dot1Q 60
+R2(config-subif)#ip address 192.168.60.254 255.255.255.0
+R2(config-subif)#exit
+
+R2(config)#interface gigabitEthernet 0/1
+R2(config-if)#no shutdown 
+R2(config-if)#ip address 200.10.10.2 255.255.255.252
+R2(config-if)#end
+R2#write 
+
+R2#show ip interface brief 
+Interface              IP-Address      OK? Method Status                Protocol 
+GigabitEthernet0/0     unassigned      YES unset  up                    up 
+GigabitEthernet0/0.40  192.168.40.254  YES manual up                    up 
+GigabitEthernet0/0.50  192.168.50.254  YES manual up                    up 
+GigabitEthernet0/0.60  192.168.60.254  YES manual up                    up 
+GigabitEthernet0/1     200.10.10.2     YES manual up                    up 
+GigabitEthernet0/2     unassigned      YES unset  administratively down down 
+Vlan1                  unassigned      YES unset  administratively down down
+
+R2#show ip route connected 
+ C   192.168.40.0/24  is directly connected, GigabitEthernet0/0.40
+ C   192.168.50.0/24  is directly connected, GigabitEthernet0/0.50
+ C   192.168.60.0/24  is directly connected, GigabitEthernet0/0.60
+ C   200.10.10.0/30  is directly connected, GigabitEthernet0/1
+
+
+R2#show  running-config | section net0/0
+interface GigabitEthernet0/0
+ no ip address
+ duplex auto
+ speed auto
+interface GigabitEthernet0/0.40
+ encapsulation dot1Q 40
+ ip address 192.168.40.254 255.255.255.0
+interface GigabitEthernet0/0.50
+ encapsulation dot1Q 50
+ ip address 192.168.50.254 255.255.255.0
+interface GigabitEthernet0/0.60
+ encapsulation dot1Q 60
+ ip address 192.168.60.254 255.255.255.0
+
+Sw4#show interfaces gigabitEthernet 0/1 switchport 
+Name: Gig0/1
+Switchport: Enabled
+Administrative Mode: trunk
+Operational Mode: trunk
+Administrative Trunking Encapsulation: dot1q
+Operational Trunking Encapsulation: dot1q
+Negotiation of Trunking: On
+Access Mode VLAN: 1 (default)
+Trunking Native Mode VLAN: 1 (default)
+Voice VLAN: none
+Administrative private-vlan host-association: none
+Administrative private-vlan mapping: none
+Administrative private-vlan trunk native VLAN: none
+Administrative private-vlan trunk encapsulation: dot1q
+Administrative private-vlan trunk normal VLANs: none
+Administrative private-vlan trunk private VLANs: none
+Operational private-vlan: none
+Trunking VLANs Enabled: All
+Pruning VLANs Enabled: 2-1001
+Capture Mode Disabled
+Capture VLANs Allowed: ALL
+Protected: false
+Unknown unicast blocked: disabled
+Unknown multicast blocked: disabled
+Appliance trust: none
+
+Sw3#show interfaces fastEthernet 0/7 switchport 
+Name: Fa0/7
+Switchport: Enabled
+Administrative Mode: trunk
+Operational Mode: trunk
+Administrative Trunking Encapsulation: dot1q
+Operational Trunking Encapsulation: dot1q
+Negotiation of Trunking: On
+Access Mode VLAN: 1 (default)
+Trunking Native Mode VLAN: 1 (default)
+Voice VLAN: none
+Administrative private-vlan host-association: none
+Administrative private-vlan mapping: none
+Administrative private-vlan trunk native VLAN: none
+Administrative private-vlan trunk encapsulation: dot1q
+Administrative private-vlan trunk normal VLANs: none
+Administrative private-vlan trunk private VLANs: none
+Operational private-vlan: none
+Trunking VLANs Enabled: All
+Pruning VLANs Enabled: 2-1001
+Capture Mode Disabled
+Capture VLANs Allowed: ALL
+Protected: false
+Unknown unicast blocked: disabled
+Unknown multicast blocked: disabled
+Appliance trust: none
+
+
+PC12 C:\>ping 192.168.40.2
+
+Pinging 192.168.40.2 with 32 bytes of data:
+
+Reply from 192.168.40.2: bytes=32 time<1ms TTL=128
+Reply from 192.168.40.2: bytes=32 time=6ms TTL=128
+Reply from 192.168.40.2: bytes=32 time<1ms TTL=128
+Reply from 192.168.40.2: bytes=32 time<1ms TTL=128
+
+Ping statistics for 192.168.40.2:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 6ms, Average = 1ms
+
+
+PC12 C:\>ping 192.168.40.3
+
+Pinging 192.168.40.3 with 32 bytes of data:
+
+Reply from 192.168.40.3: bytes=32 time<1ms TTL=128
+Reply from 192.168.40.3: bytes=32 time=3ms TTL=128
+Reply from 192.168.40.3: bytes=32 time<1ms TTL=128
+Reply from 192.168.40.3: bytes=32 time<1ms TTL=128
+
+Ping statistics for 192.168.40.3:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 3ms, Average = 0ms
+
+PC12 C:\>ping 192.168.50.1
+
+Pinging 192.168.50.1 with 32 bytes of data:
+
+Request timed out.
+Reply from 192.168.50.1: bytes=32 time<1ms TTL=127
+Reply from 192.168.50.1: bytes=32 time<1ms TTL=127
+Reply from 192.168.50.1: bytes=32 time<1ms TTL=127
+
+Ping statistics for 192.168.50.1:
+    Packets: Sent = 4, Received = 3, Lost = 1 (25% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 0ms, Average = 0ms
+
+PC12 C:\>ping 192.168.50.3
+
+Pinging 192.168.50.3 with 32 bytes of data:
+
+Request timed out.
+Reply from 192.168.50.3: bytes=32 time<1ms TTL=127
+Reply from 192.168.50.3: bytes=32 time<1ms TTL=127
+Reply from 192.168.50.3: bytes=32 time<1ms TTL=127
+
+Ping statistics for 192.168.50.3:
+    Packets: Sent = 4, Received = 3, Lost = 1 (25% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 0ms, Average = 0ms
+
+PC12 C:\>ping 192.168.60.2
+
+Pinging 192.168.60.2 with 32 bytes of data:
+
+Request timed out.
+Reply from 192.168.60.2: bytes=32 time<1ms TTL=127
+Reply from 192.168.60.2: bytes=32 time<1ms TTL=127
+Reply from 192.168.60.2: bytes=32 time=1ms TTL=127
+
+Ping statistics for 192.168.60.2:
+    Packets: Sent = 4, Received = 3, Lost = 1 (25% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 1ms, Average = 0ms
+
+PC12 C:\>ping 192.168.60.4
+
+Pinging 192.168.60.4 with 32 bytes of data:
+
+Request timed out.
+Reply from 192.168.60.4: bytes=32 time<1ms TTL=127
+Reply from 192.168.60.4: bytes=32 time=1ms TTL=127
+Reply from 192.168.60.4: bytes=32 time<1ms TTL=127
+
+Ping statistics for 192.168.60.4:
+    Packets: Sent = 4, Received = 3, Lost = 1 (25% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 1ms, Average = 0ms
+
+R1#show ip route connected 
+ C   192.168.10.0/24  is directly connected, GigabitEthernet0/0.10
+ C   192.168.20.0/24  is directly connected, GigabitEthernet0/0.20
+ C   192.168.30.0/24  is directly connected, GigabitEthernet0/0.30
+ C   200.10.10.0/30  is directly connected, GigabitEthernet0/1
+
+R2#show ip route connected 
+ C   192.168.40.0/24  is directly connected, GigabitEthernet0/0.40
+ C   192.168.50.0/24  is directly connected, GigabitEthernet0/0.50
+ C   192.168.60.0/24  is directly connected, GigabitEthernet0/0.60
+ C   200.10.10.0/30  is directly connected, GigabitEthernet0/1
+
+R1#show ip route connected 
+ C   192.168.10.0/24  is directly connected, GigabitEthernet0/0.10
+ C   192.168.20.0/24  is directly connected, GigabitEthernet0/0.20
+ C   192.168.30.0/24  is directly connected, GigabitEthernet0/0.30
+ C   200.10.10.0/30  is directly connected, GigabitEthernet0/1
+
+R1#configure terminal 
+R1(config)#ip route 192.168.40.0 255.255.255.0 200.10.10.2
+R1(config)#ip route 192.168.50.0 255.255.255.0 200.10.10.2
+R1(config)#ip route 192.168.60.0 255.255.255.0 200.10.10.2
+R1(config)#end
+R1#write 
+
+R1#show ip route static 
+S    192.168.40.0/24 [1/0] via 200.10.10.2
+S    192.168.50.0/24 [1/0] via 200.10.10.2
+S    192.168.60.0/24 [1/0] via 200.10.10.2
+
+R2#show ip route connected 
+ C   192.168.40.0/24  is directly connected, GigabitEthernet0/0.40
+ C   192.168.50.0/24  is directly connected, GigabitEthernet0/0.50
+ C   192.168.60.0/24  is directly connected, GigabitEthernet0/0.60
+ C   200.10.10.0/30  is directly connected, GigabitEthernet0/1
+
+
+R2#configure terminal 
+R2(config)#ip route 192.168.10.0 255.255.255.0 200.10.10.1
+R2(config)#ip route 192.168.20.0 255.255.255.0 200.10.10.1
+R2(config)#ip route 192.168.30.0 255.255.255.0 200.10.10.1
+R2(config)#end
+R2#write 
+
+R2#show ip route connected 
+ C   192.168.40.0/24  is directly connected, GigabitEthernet0/0.40
+ C   192.168.50.0/24  is directly connected, GigabitEthernet0/0.50
+ C   192.168.60.0/24  is directly connected, GigabitEthernet0/0.60
+ C   200.10.10.0/30  is directly connected, GigabitEthernet0/1
+
+R2#show ip route static 
+S    192.168.10.0/24 [1/0] via 200.10.10.1
+S    192.168.20.0/24 [1/0] via 200.10.10.1
+S    192.168.30.0/24 [1/0] via 200.10.10.1
+
+PC0 C:\>ping 192.168.40.1
+
+Pinging 192.168.40.1 with 32 bytes of data:
+
+Request timed out.
+Request timed out.
+Reply from 192.168.40.1: bytes=32 time<1ms TTL=126
+Reply from 192.168.40.1: bytes=32 time=10ms TTL=126
+
+Ping statistics for 192.168.40.1:
+    Packets: Sent = 4, Received = 2, Lost = 2 (50% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 10ms, Average = 5ms
+
+PC0 C:\>ping 192.168.40.1
+
+Pinging 192.168.40.1 with 32 bytes of data:
+
+Reply from 192.168.40.1: bytes=32 time=1ms TTL=126
+Reply from 192.168.40.1: bytes=32 time<1ms TTL=126
+Reply from 192.168.40.1: bytes=32 time<1ms TTL=126
+Reply from 192.168.40.1: bytes=32 time=1ms TTL=126
+
+Ping statistics for 192.168.40.1:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 1ms, Average = 0ms
+
+PC0 C:\>ping 192.168.40.3
+
+Pinging 192.168.40.3 with 32 bytes of data:
+
+Request timed out.
+Reply from 192.168.40.3: bytes=32 time=1ms TTL=126
+Reply from 192.168.40.3: bytes=32 time<1ms TTL=126
+Reply from 192.168.40.3: bytes=32 time<1ms TTL=126
+
+Ping statistics for 192.168.40.3:
+    Packets: Sent = 4, Received = 3, Lost = 1 (25% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 1ms, Average = 0ms
+
+PC0 C:\>ping 192.168.50.2
+
+Pinging 192.168.50.2 with 32 bytes of data:
+
+Request timed out.
+Reply from 192.168.50.2: bytes=32 time<1ms TTL=126
+Reply from 192.168.50.2: bytes=32 time<1ms TTL=126
+Reply from 192.168.50.2: bytes=32 time<1ms TTL=126
+
+Ping statistics for 192.168.50.2:
+    Packets: Sent = 4, Received = 3, Lost = 1 (25% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 0ms, Average = 0ms
+
+PC0 C:\>ping 192.168.50.4
+
+Pinging 192.168.50.4 with 32 bytes of data:
+
+Request timed out.
+Reply from 192.168.50.4: bytes=32 time=1ms TTL=126
+Reply from 192.168.50.4: bytes=32 time<1ms TTL=126
+Reply from 192.168.50.4: bytes=32 time<1ms TTL=126
+
+Ping statistics for 192.168.50.4:
+    Packets: Sent = 4, Received = 3, Lost = 1 (25% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 1ms, Average = 0ms
+
+PC0 C:\>ping 192.168.60.1
+
+Pinging 192.168.60.1 with 32 bytes of data:
+
+Request timed out.
+Reply from 192.168.60.1: bytes=32 time<1ms TTL=126
+Reply from 192.168.60.1: bytes=32 time<1ms TTL=126
+Reply from 192.168.60.1: bytes=32 time<1ms TTL=126
+
+Ping statistics for 192.168.60.1:
+    Packets: Sent = 4, Received = 3, Lost = 1 (25% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 0ms, Average = 0ms
+
+PC0 C:\>ping 192.168.60.3
+
+Pinging 192.168.60.3 with 32 bytes of data:
+
+Request timed out.
+Reply from 192.168.60.3: bytes=32 time<1ms TTL=126
+Reply from 192.168.60.3: bytes=32 time<1ms TTL=126
+Reply from 192.168.60.3: bytes=32 time<1ms TTL=126
+
+Ping statistics for 192.168.60.3:
+    Packets: Sent = 4, Received = 3, Lost = 1 (25% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 0ms, Average = 0ms
+
+
+
+R1#show running-config | section ip route
+ip route 192.168.40.0 255.255.255.0 200.10.10.2 
+ip route 192.168.50.0 255.255.255.0 200.10.10.2 
+ip route 192.168.60.0 255.255.255.0 200.10.10.2 
+R1#
+R1#conf
+R1#configure t
+R1#configure terminal 
+Enter configuration commands, one per line.  End with CNTL/Z.
+R1(config)#no ip route 192.168.40.0 255.255.255.0 200.10.10.2 
+R1(config)#
+R1(config)#no ip route 192.168.50.0 255.255.255.0 200.10.10.2 
+R1(config)#
+R1(config)#no ip route 192.168.60.0 255.255.255.0 200.10.10.2 
+R1(config)#
+R1(config)#end
+R1#
+%SYS-5-CONFIG_I: Configured from console by console
+
+R1#wr
+R1#write 
+Building configuration...
+[OK]
+R1#
+R1#
+R1#show running-config | section ip route
+R1#
+R1#sh
+R1#show ip rou
+R1#show ip route 
+Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2, E - EGP
+       i - IS-IS, L1 - IS-IS level-1, L2 - IS-IS level-2, ia - IS-IS inter area
+       * - candidate default, U - per-user static route, o - ODR
+       P - periodic downloaded static route
+
+Gateway of last resort is not set
+
+     192.168.10.0/24 is variably subnetted, 2 subnets, 2 masks
+C       192.168.10.0/24 is directly connected, GigabitEthernet0/0.10
+L       192.168.10.254/32 is directly connected, GigabitEthernet0/0.10
+     192.168.20.0/24 is variably subnetted, 2 subnets, 2 masks
+C       192.168.20.0/24 is directly connected, GigabitEthernet0/0.20
+L       192.168.20.254/32 is directly connected, GigabitEthernet0/0.20
+     192.168.30.0/24 is variably subnetted, 2 subnets, 2 masks
+C       192.168.30.0/24 is directly connected, GigabitEthernet0/0.30
+L       192.168.30.254/32 is directly connected, GigabitEthernet0/0.30
+     200.10.10.0/24 is variably subnetted, 2 subnets, 2 masks
+C       200.10.10.0/30 is directly connected, GigabitEthernet0/1
+L       200.10.10.1/32 is directly connected, GigabitEthernet0/1
+
+
+R2#show running-config | section ip route
+ip route 192.168.10.0 255.255.255.0 200.10.10.1 
+ip route 192.168.20.0 255.255.255.0 200.10.10.1 
+ip route 192.168.30.0 255.255.255.0 200.10.10.1 
+
+R2#configure terminal 
+Enter configuration commands, one per line.  End with CNTL/Z.
+R2(config)#no ip route 192.168.10.0 255.255.255.0 200.10.10.1
+R2(config)#no ip route 192.168.20.0 255.255.255.0 200.10.10.1
+R2(config)#no ip route 192.168.30.0 255.255.255.0 200.10.10.1
+R2(config)#end
+R2#write 
+
+R2#show running-config | section ip route
+
+R2#show ip route 
+Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2, E - EGP
+       i - IS-IS, L1 - IS-IS level-1, L2 - IS-IS level-2, ia - IS-IS inter area
+       * - candidate default, U - per-user static route, o - ODR
+       P - periodic downloaded static route
+
+Gateway of last resort is not set
+
+     192.168.40.0/24 is variably subnetted, 2 subnets, 2 masks
+C       192.168.40.0/24 is directly connected, GigabitEthernet0/0.40
+L       192.168.40.254/32 is directly connected, GigabitEthernet0/0.40
+     192.168.50.0/24 is variably subnetted, 2 subnets, 2 masks
+C       192.168.50.0/24 is directly connected, GigabitEthernet0/0.50
+L       192.168.50.254/32 is directly connected, GigabitEthernet0/0.50
+     192.168.60.0/24 is variably subnetted, 2 subnets, 2 masks
+C       192.168.60.0/24 is directly connected, GigabitEthernet0/0.60
+L       192.168.60.254/32 is directly connected, GigabitEthernet0/0.60
+     200.10.10.0/24 is variably subnetted, 2 subnets, 2 masks
+C       200.10.10.0/30 is directly connected, GigabitEthernet0/1
+L       200.10.10.2/32 is directly connected, GigabitEthernet0/1
+
+
+R1#configure terminal 
+R1(config)#router eigrp 10
+R1(config-router)#no auto-summary 
+R1(config-router)#eigrp router-id 1.1.1.1
+R1(config-router)#network 192.168.10.0
+R1(config-router)#network 192.168.20.0
+R1(config-router)#network 192.168.30.0
+R1(config-router)#network 200.10.10.0
+R1(config-router)#end
+R1#write 
+
+R1#show running-config | section eigrp
+router eigrp 10
+ eigrp router-id 1.1.1.1
+ network 192.168.10.0
+ network 192.168.20.0
+ network 192.168.30.0
+ network 200.10.10.0
+
+R1#show ip protocols 
+
+Routing Protocol is "eigrp  10 " 
+  Outgoing update filter list for all interfaces is not set 
+  Incoming update filter list for all interfaces is not set 
+  Default networks flagged in outgoing updates  
+  Default networks accepted from incoming updates 
+  Redistributing: eigrp 10
+  EIGRP-IPv4 Protocol for AS(10)
+    Metric weight K1=1, K2=0, K3=1, K4=0, K5=0
+    NSF-aware route hold timer is 240
+    Router-ID: 1.1.1.1
+    Topology : 0 (base)
+      Active Timer: 3 min
+      Distance: internal 90 external 170
+      Maximum path: 4
+      Maximum hopcount 100
+      Maximum metric variance 1
+
+  Automatic Summarization: disabled
+  Automatic address summarization: 
+  Maximum path: 4
+  Routing for Networks:  
+     192.168.10.0
+     192.168.20.0
+     192.168.30.0
+     200.10.10.0
+  Routing Information Sources:  
+    Gateway         Distance      Last Update 
+  Distance: internal 90 external 170
+
+R1#show ip eigrp interfaces 
+IP-EIGRP interfaces for process 10
+
+                        Xmit Queue   Mean   Pacing Time   Multicast    Pending
+Interface        Peers  Un/Reliable  SRTT   Un/Reliable   Flow Timer   Routes
+Gig0/0.10          0        0/0      1236       0/10           0           0
+Gig0/0.20          0        0/0      1236       0/10           0           0
+Gig0/0.30          0        0/0      1236       0/10           0           0
+Gig0/1             0        0/0      1236       0/10           0           0
+
+R1#show ip eigrp topology 
+IP-EIGRP Topology Table for AS 10/ID(1.1.1.1)
+
+Codes: P - Passive, A - Active, U - Update, Q - Query, R - Reply,
+       r - Reply status
+
+P 192.168.10.0/24, 1 successors, FD is 28160
+         via Connected, GigabitEthernet0/0.10
+P 192.168.20.0/24, 1 successors, FD is 28160
+         via Connected, GigabitEthernet0/0.20
+P 192.168.30.0/24, 1 successors, FD is 28160
+         via Connected, GigabitEthernet0/0.30
+P 200.10.10.0/30, 1 successors, FD is 2816
+         via Connected, GigabitEthernet0/1
+
+
+
+R2#configure terminal 
+R2(config)#router eigrp 10
+R2(config-router)#no auto-summary 
+
+R2(config-router)#eigrp router-id 2.2.2.2
+R2(config-router)#network 192.168.40.0
+R2(config-router)#network 192.168.50.0
+R2(config-router)#network 192.168.60.0
+R2(config-router)#network 200.10.10.0
+R2(config-router)#end
+R2#write 
+
+R2#show running-config | section eigrp
+router eigrp 10
+ eigrp router-id 2.2.2.2
+ network 192.168.40.0
+ network 192.168.50.0
+ network 192.168.60.0
+ network 200.10.10.0
+
+R2#show ip protocols 
+
+Routing Protocol is "eigrp  10 " 
+  Outgoing update filter list for all interfaces is not set 
+  Incoming update filter list for all interfaces is not set 
+  Default networks flagged in outgoing updates  
+  Default networks accepted from incoming updates 
+  Redistributing: eigrp 10
+  EIGRP-IPv4 Protocol for AS(10)
+    Metric weight K1=1, K2=0, K3=1, K4=0, K5=0
+    NSF-aware route hold timer is 240
+    Router-ID: 2.2.2.2
+    Topology : 0 (base)
+      Active Timer: 3 min
+      Distance: internal 90 external 170
+      Maximum path: 4
+      Maximum hopcount 100
+      Maximum metric variance 1
+
+  Automatic Summarization: disabled
+  Automatic address summarization: 
+  Maximum path: 4
+  Routing for Networks:  
+     192.168.40.0
+     192.168.50.0
+     192.168.60.0
+     200.10.10.0
+  Routing Information Sources:  
+    Gateway         Distance      Last Update 
+    200.10.10.1     90            113067473  
+  Distance: internal 90 external 170
+
+R2#show ip eigrp neighbors 
+IP-EIGRP neighbors for process 10
+H   Address         Interface      Hold Uptime    SRTT   RTO   Q   Seq
+                                   (sec)          (ms)        Cnt  Num
+0   200.10.10.1     Gig0/1         14   00:00:20  40     1000  0   7
+
+R2#show ip eigrp interfaces 
+IP-EIGRP interfaces for process 10
+
+                        Xmit Queue   Mean   Pacing Time   Multicast    Pending
+Interface        Peers  Un/Reliable  SRTT   Un/Reliable   Flow Timer   Routes
+Gig0/0.40          0        0/0      1236       0/10           0           0
+Gig0/0.50          0        0/0      1236       0/10           0           0
+Gig0/0.60          0        0/0      1236       0/10           0           0
+Gig0/1             1        0/0      1236       0/10           0           0
+
+R2#show ip eigrp topology 
+IP-EIGRP Topology Table for AS 10/ID(2.2.2.2)
+
+Codes: P - Passive, A - Active, U - Update, Q - Query, R - Reply,
+       r - Reply status
+
+P 192.168.10.0/24, 1 successors, FD is 28416
+         via 200.10.10.1 (28416/28160), GigabitEthernet0/1
+P 192.168.20.0/24, 1 successors, FD is 28416
+         via 200.10.10.1 (28416/28160), GigabitEthernet0/1
+P 192.168.30.0/24, 1 successors, FD is 28416
+         via 200.10.10.1 (28416/28160), GigabitEthernet0/1
+P 192.168.40.0/24, 1 successors, FD is 28160
+         via Connected, GigabitEthernet0/0.40
+P 192.168.50.0/24, 1 successors, FD is 28160
+         via Connected, GigabitEthernet0/0.50
+P 192.168.60.0/24, 1 successors, FD is 28160
+         via Connected, GigabitEthernet0/0.60
+P 200.10.10.0/30, 1 successors, FD is 2816
+         via Connected, GigabitEthernet0/1
+
+R2#show ip route eigrp 
+D    192.168.10.0/24 [90/28416] via 200.10.10.1, 00:00:31, GigabitEthernet0/1
+D    192.168.20.0/24 [90/28416] via 200.10.10.1, 00:00:31, GigabitEthernet0/1
+D    192.168.30.0/24 [90/28416] via 200.10.10.1, 00:00:31, GigabitEthernet0/1
+
+
+R1#show ip eigrp neighbors 
+IP-EIGRP neighbors for process 10
+H   Address         Interface      Hold Uptime    SRTT   RTO   Q   Seq
+                                   (sec)          (ms)        Cnt  Num
+0   200.10.10.2     Gig0/1         11   00:02:51  40     1000  0   7
+	
+R1#show ip eigrp interfaces
+IP-EIGRP interfaces for process 10
+
+                        Xmit Queue   Mean   Pacing Time   Multicast    Pending
+Interface        Peers  Un/Reliable  SRTT   Un/Reliable   Flow Timer   Routes
+Gig0/0.10          0        0/0      1236       0/10           0           0
+Gig0/0.20          0        0/0      1236       0/10           0           0
+Gig0/0.30          0        0/0      1236       0/10           0           0
+Gig0/1             1        0/0      1236       0/10           0           0
+
+R1#show ip eigrp topology 
+IP-EIGRP Topology Table for AS 10/ID(1.1.1.1)
+
+Codes: P - Passive, A - Active, U - Update, Q - Query, R - Reply,
+       r - Reply status
+
+P 192.168.10.0/24, 1 successors, FD is 28160
+         via Connected, GigabitEthernet0/0.10
+P 192.168.20.0/24, 1 successors, FD is 28160
+         via Connected, GigabitEthernet0/0.20
+P 192.168.30.0/24, 1 successors, FD is 28160
+         via Connected, GigabitEthernet0/0.30
+P 192.168.40.0/24, 1 successors, FD is 28416
+         via 200.10.10.2 (28416/28160), GigabitEthernet0/1
+P 192.168.50.0/24, 1 successors, FD is 28416
+         via 200.10.10.2 (28416/28160), GigabitEthernet0/1
+P 192.168.60.0/24, 1 successors, FD is 28416
+         via 200.10.10.2 (28416/28160), GigabitEthernet0/1
+P 200.10.10.0/30, 1 successors, FD is 2816
+         via Connected, GigabitEthernet0/1
+
+R1#show ip route eigrp 
+     192.168.30.0/24 is variably subnetted, 2 subnets, 2 masks
+D    192.168.40.0/24 [90/28416] via 200.10.10.2, 00:03:06, GigabitEthernet0/1
+D    192.168.50.0/24 [90/28416] via 200.10.10.2, 00:03:06, GigabitEthernet0/1
+D    192.168.60.0/24 [90/28416] via 200.10.10.2, 00:03:06, GigabitEthernet0/1
+
+
+
+
+R1#show running-config | section eigrp
+router eigrp 10
+ eigrp router-id 1.1.1.1
+ network 192.168.10.0
+ network 192.168.20.0
+ network 192.168.30.0
+ network 200.10.10.0
+
+R1#configure terminal 
+R1(config)#no router eigrp 10
+R1(config)#end
+R1#write 
+
+R1#show running-config | section eigrp
+
+R1#show ip protocols 
+
+R1#show ip route eigrp 
+
+
+R2#show running-config | section eigrp
+router eigrp 10
+ eigrp router-id 2.2.2.2
+ network 192.168.40.0
+ network 192.168.50.0
+ network 192.168.60.0
+ network 200.10.10.0
+
+R2#configure terminal 
+R2(config)#no router eigrp 10
+R2(config)#end
+R2#write 
+
+R2#show running-config | section eigrp
+
+R2#show ip protocols 
+
+R2#show ip route eigrp
+
+
+R1#configure terminal 
+R1(config)#router ospf 1
+R1(config-router)#router-id 1.1.1.1
+R1(config-router)#network 200.10.10.0 0.0.0.3 area 0
+R1(config-router)#network 192.168.10.0 0.0.0.255 area 10
+R1(config-router)#network 192.168.20.0 0.0.0.255 area 20
+R1(config-router)#network 192.168.30.0 0.0.0.255 area 30
+R1(config-router)#end
+R1#write 
+
+R1#show running-config | section ospf
+router ospf 1
+ router-id 1.1.1.1
+ log-adjacency-changes
+ network 200.10.10.0 0.0.0.3 area 0
+ network 192.168.10.0 0.0.0.255 area 10
+ network 192.168.20.0 0.0.0.255 area 20
+ network 192.168.30.0 0.0.0.255 area 30
+
+R1#show ip protocols 
+
+Routing Protocol is "ospf 1"
+  Outgoing update filter list for all interfaces is not set 
+  Incoming update filter list for all interfaces is not set 
+  Router ID 1.1.1.1
+  Number of areas in this router is 4. 4 normal 0 stub 0 nssa
+  Maximum path: 4
+  Routing for Networks:
+    200.10.10.0 0.0.0.3 area 0
+    192.168.10.0 0.0.0.255 area 10
+    192.168.20.0 0.0.0.255 area 20
+    192.168.30.0 0.0.0.255 area 30
+  Routing Information Sources:  
+    Gateway         Distance      Last Update 
+    1.1.1.1              110      00:00:14
+  Distance: (default is 110)
+
+
+R1#show ip ospf database 
+            OSPF Router with ID (1.1.1.1) (Process ID 1)
+
+                Router Link States (Area 0)
+
+Link ID         ADV Router      Age         Seq#       Checksum Link count
+1.1.1.1         1.1.1.1         30          0x80000002 0x00adc2 1
+
+                Summary Net Link States (Area 0)
+Link ID         ADV Router      Age         Seq#       Checksum
+192.168.10.0    1.1.1.1         20          0x80000001 0x005591
+192.168.30.0    1.1.1.1         16          0x80000002 0x00765b
+192.168.20.0    1.1.1.1         11          0x80000003 0x00e2f7
+
+                Router Link States (Area 10)
+
+Link ID         ADV Router      Age         Seq#       Checksum Link count
+1.1.1.1         1.1.1.1         30          0x80000001 0x009641 1
+
+                Summary Net Link States (Area 10)
+Link ID         ADV Router      Age         Seq#       Checksum
+200.10.10.0     1.1.1.1         26          0x80000001 0x004a36
+192.168.30.0    1.1.1.1         16          0x80000002 0x00765b
+192.168.20.0    1.1.1.1         11          0x80000003 0x00e2f7
+
+                Router Link States (Area 20)
+
+Link ID         ADV Router      Age         Seq#       Checksum Link count
+1.1.1.1         1.1.1.1         25          0x80000001 0x00f0dc 1
+
+                Summary Net Link States (Area 20)
+Link ID         ADV Router      Age         Seq#       Checksum
+200.10.10.0     1.1.1.1         25          0x80000001 0x004a36
+192.168.10.0    1.1.1.1         20          0x80000002 0x005392
+192.168.30.0    1.1.1.1         15          0x80000003 0x00745c
+
+                Router Link States (Area 30)
+
+Link ID         ADV Router      Age         Seq#       Checksum Link count
+1.1.1.1         1.1.1.1         20          0x80000001 0x004b78 1
+
+                Summary Net Link States (Area 30)
+Link ID         ADV Router      Age         Seq#       Checksum
+200.10.10.0     1.1.1.1         20          0x80000001 0x004a36
+192.168.10.0    1.1.1.1         20          0x80000002 0x005392
+192.168.20.0    1.1.1.1         11          0x80000003 0x00e2f7
+
+R1#show ip ospf interface 
+
+GigabitEthernet0/1 is up, line protocol is up
+  Internet address is 200.10.10.1/30, Area 0
+  Process ID 1, Router ID 1.1.1.1, Network Type BROADCAST, Cost: 1
+  Transmit Delay is 1 sec, State DR, Priority 1
+  Designated Router (ID) 1.1.1.1, Interface address 200.10.10.1
+  No backup designated router on this network
+  Timer intervals configured, Hello 10, Dead 40, Wait 40, Retransmit 5
+    Hello due in 00:00:03
+  Index 1/1, flood queue length 0
+  Next 0x0(0)/0x0(0)
+  Last flood scan length is 1, maximum is 1
+  Last flood scan time is 0 msec, maximum is 0 msec
+  Neighbor Count is 0, Adjacent neighbor count is 0
+  Suppress hello for 0 neighbor(s)
+GigabitEthernet0/0.10 is up, line protocol is up
+  Internet address is 192.168.10.254/24, Area 10
+  Process ID 1, Router ID 1.1.1.1, Network Type BROADCAST, Cost: 1
+  Transmit Delay is 1 sec, State WAITING, Priority 1
+  No designated router on this network
+  No backup designated router on this network
+  Timer intervals configured, Hello 10, Dead 40, Wait 40, Retransmit 5
+    Hello due in 00:00:05
+  Index 2/2, flood queue length 0
+  Next 0x0(0)/0x0(0)
+  Last flood scan length is 1, maximum is 1
+  Last flood scan time is 0 msec, maximum is 0 msec
+  Neighbor Count is 0, Adjacent neighbor count is 0
+  Suppress hello for 0 neighbor(s)
+GigabitEthernet0/0.20 is up, line protocol is up
+  Internet address is 192.168.20.254/24, Area 20
+  Process ID 1, Router ID 1.1.1.1, Network Type BROADCAST, Cost: 1
+  Transmit Delay is 1 sec, State WAITING, Priority 1
+  No designated router on this network
+  No backup designated router on this network
+  Timer intervals configured, Hello 10, Dead 40, Wait 40, Retransmit 5
+    Hello due in 00:00:09
+  Index 3/3, flood queue length 0
+  Next 0x0(0)/0x0(0)
+  Last flood scan length is 1, maximum is 1
+  Last flood scan time is 0 msec, maximum is 0 msec
+  Neighbor Count is 0, Adjacent neighbor count is 0
+  Suppress hello for 0 neighbor(s)
+GigabitEthernet0/0.30 is up, line protocol is up
+  Internet address is 192.168.30.254/24, Area 30
+  Process ID 1, Router ID 1.1.1.1, Network Type BROADCAST, Cost: 1
+  Transmit Delay is 1 sec, State WAITING, Priority 1
+  No designated router on this network
+  No backup designated router on this network
+  Timer intervals configured, Hello 10, Dead 40, Wait 40, Retransmit 5
+    Hello due in 00:00:05
+  Index 4/4, flood queue length 0
+  Next 0x0(0)/0x0(0)
+  Last flood scan length is 1, maximum is 1
+  Last flood scan time is 0 msec, maximum is 0 msec
+  Neighbor Count is 0, Adjacent neighbor count is 0
+  Suppress hello for 0 neighbor(s)
+
+
+R2#configure terminal 
+R2(config)#router ospf 2
+R2(config-router)#router-id 2.2.2.2
+R2(config-router)#network 200.10.10.0  0.0.0.3   area 0
+R2(config-router)#network 192.168.40.0 0.0.0.255 area 40
+R2(config-router)#network 192.168.50.0 0.0.0.255 area 50
+R2(config-router)#network 192.168.60.0 0.0.0.255 area 60
+R2(config-router)#end
+R2#write 
+
+R2#show running-config | section ospf
+router ospf 2
+ router-id 2.2.2.2
+ log-adjacency-changes
+ network 200.10.10.0 0.0.0.3 area 0
+ network 192.168.40.0 0.0.0.255 area 40
+ network 192.168.50.0 0.0.0.255 area 50
+ network 192.168.60.0 0.0.0.255 area 60
+
+
+R2#show ip protocols 
+
+Routing Protocol is "ospf 2"
+  Outgoing update filter list for all interfaces is not set 
+  Incoming update filter list for all interfaces is not set 
+  Router ID 2.2.2.2
+  Number of areas in this router is 4. 4 normal 0 stub 0 nssa
+  Maximum path: 4
+  Routing for Networks:
+    200.10.10.0 0.0.0.3 area 0
+    192.168.40.0 0.0.0.255 area 40
+    192.168.50.0 0.0.0.255 area 50
+    192.168.60.0 0.0.0.255 area 60
+  Routing Information Sources:  
+    Gateway         Distance      Last Update 
+    1.1.1.1              110      00:00:36
+    2.2.2.2              110      00:00:18
+  Distance: (default is 110)
+
+
+R2#show ip ospf neighbor 
+
+
+Neighbor ID     Pri   State           Dead Time   Address         Interface
+1.1.1.1           1   FULL/DR         00:00:30    200.10.10.1     GigabitEthernet0/1
+
+R2#show ip ospf database 
+            OSPF Router with ID (2.2.2.2) (Process ID 2)
+
+                Router Link States (Area 0)
+
+Link ID         ADV Router      Age         Seq#       Checksum Link count
+1.1.1.1         1.1.1.1         43          0x80000003 0x007a14 1
+2.2.2.2         2.2.2.2         37          0x80000003 0x003c49 1
+
+                Net Link States (Area 0)
+Link ID         ADV Router      Age         Seq#       Checksum
+200.10.10.1     1.1.1.1         43          0x80000001 0x0043c8
+
+                Summary Net Link States (Area 0)
+Link ID         ADV Router      Age         Seq#       Checksum
+192.168.10.0    1.1.1.1         160         0x80000001 0x005591
+192.168.30.0    1.1.1.1         156         0x80000002 0x00765b
+192.168.20.0    1.1.1.1         151         0x80000003 0x00e2f7
+192.168.40.0    2.2.2.2         27          0x80000001 0x00ebd8
+192.168.50.0    2.2.2.2         17          0x80000002 0x007b3e
+192.168.60.0    2.2.2.2         17          0x80000003 0x000ba3
+
+                Router Link States (Area 40)
+
+Link ID         ADV Router      Age         Seq#       Checksum Link count
+2.2.2.2         2.2.2.2         36          0x80000001 0x005958 1
+
+                Summary Net Link States (Area 40)
+Link ID         ADV Router      Age         Seq#       Checksum
+200.10.10.0     2.2.2.2         27          0x80000001 0x002c50
+192.168.10.0    2.2.2.2         27          0x80000002 0x003fa1
+192.168.30.0    2.2.2.2         27          0x80000003 0x00606b
+192.168.20.0    2.2.2.2         27          0x80000004 0x00cc08
+192.168.50.0    2.2.2.2         17          0x80000005 0x007541
+192.168.60.0    2.2.2.2         17          0x80000006 0x0005a6
+
+                Router Link States (Area 50)
+
+Link ID         ADV Router      Age         Seq#       Checksum Link count
+2.2.2.2         2.2.2.2         31          0x80000001 0x00b3f3 1
+
+                Summary Net Link States (Area 50)
+Link ID         ADV Router      Age         Seq#       Checksum
+200.10.10.0     2.2.2.2         27          0x80000001 0x002c50
+192.168.10.0    2.2.2.2         27          0x80000002 0x003fa1
+192.168.30.0    2.2.2.2         27          0x80000003 0x00606b
+192.168.20.0    2.2.2.2         27          0x80000004 0x00cc08
+192.168.40.0    2.2.2.2         27          0x80000005 0x00e3dc
+192.168.60.0    2.2.2.2         17          0x80000006 0x0005a6
+
+                Router Link States (Area 60)
+
+Link ID         ADV Router      Age         Seq#       Checksum Link count
+2.2.2.2         2.2.2.2         26          0x80000001 0x000e8f 1
+
+                Summary Net Link States (Area 60)
+Link ID         ADV Router      Age         Seq#       Checksum
+200.10.10.0     2.2.2.2         17          0x80000001 0x002c50
+192.168.10.0    2.2.2.2         17          0x80000002 0x003fa1
+192.168.30.0    2.2.2.2         17          0x80000003 0x00606b
+192.168.20.0    2.2.2.2         17          0x80000004 0x00cc08
+192.168.40.0    2.2.2.2         17          0x80000005 0x00e3dc
+192.168.50.0    2.2.2.2         17          0x80000006 0x007342
+
+R2#show ip ospf interface  
+
+GigabitEthernet0/1 is up, line protocol is up
+  Internet address is 200.10.10.2/30, Area 0
+  Process ID 2, Router ID 2.2.2.2, Network Type BROADCAST, Cost: 1
+  Transmit Delay is 1 sec, State BDR, Priority 1
+  Designated Router (ID) 1.1.1.1, Interface address 200.10.10.1
+  Backup Designated Router (ID) 2.2.2.2, Interface address 200.10.10.2
+  Timer intervals configured, Hello 10, Dead 40, Wait 40, Retransmit 5
+    Hello due in 00:00:02
+  Index 1/1, flood queue length 0
+  Next 0x0(0)/0x0(0)
+  Last flood scan length is 1, maximum is 1
+  Last flood scan time is 0 msec, maximum is 0 msec
+  Neighbor Count is 1, Adjacent neighbor count is 1
+    Adjacent with neighbor 1.1.1.1  (Designated Router)
+  Suppress hello for 0 neighbor(s)
+GigabitEthernet0/0.40 is up, line protocol is up
+  Internet address is 192.168.40.254/24, Area 40
+  Process ID 2, Router ID 2.2.2.2, Network Type BROADCAST, Cost: 1
+  Transmit Delay is 1 sec, State DR, Priority 1
+  Designated Router (ID) 2.2.2.2, Interface address 192.168.40.254
+  No backup designated router on this network
+  Timer intervals configured, Hello 10, Dead 40, Wait 40, Retransmit 5
+    Hello due in 00:00:07
+  Index 2/2, flood queue length 0
+  Next 0x0(0)/0x0(0)
+  Last flood scan length is 1, maximum is 1
+  Last flood scan time is 0 msec, maximum is 0 msec
+  Neighbor Count is 0, Adjacent neighbor count is 0
+  Suppress hello for 0 neighbor(s)
+GigabitEthernet0/0.50 is up, line protocol is up
+  Internet address is 192.168.50.254/24, Area 50
+  Process ID 2, Router ID 2.2.2.2, Network Type BROADCAST, Cost: 1
+  Transmit Delay is 1 sec, State WAITING, Priority 1
+  No designated router on this network
+  No backup designated router on this network
+  Timer intervals configured, Hello 10, Dead 40, Wait 40, Retransmit 5
+    Hello due in 00:00:02
+  Index 3/3, flood queue length 0
+  Next 0x0(0)/0x0(0)
+  Last flood scan length is 1, maximum is 1
+  Last flood scan time is 0 msec, maximum is 0 msec
+  Neighbor Count is 0, Adjacent neighbor count is 0
+  Suppress hello for 0 neighbor(s)
+GigabitEthernet0/0.60 is up, line protocol is up
+  Internet address is 192.168.60.254/24, Area 60
+  Process ID 2, Router ID 2.2.2.2, Network Type BROADCAST, Cost: 1
+  Transmit Delay is 1 sec, State WAITING, Priority 1
+  No designated router on this network
+  No backup designated router on this network
+  Timer intervals configured, Hello 10, Dead 40, Wait 40, Retransmit 5
+    Hello due in 00:00:07
+  Index 4/4, flood queue length 0
+  Next 0x0(0)/0x0(0)
+  Last flood scan length is 1, maximum is 1
+  Last flood scan time is 0 msec, maximum is 0 msec
+  Neighbor Count is 0, Adjacent neighbor count is 0
+  Suppress hello for 0 neighbor(s)
+
+R2#show ip route ospf 
+O IA 192.168.10.0 [110/2] via 200.10.10.1, 00:01:12, GigabitEthernet0/1
+O IA 192.168.20.0 [110/2] via 200.10.10.1, 00:01:12, GigabitEthernet0/1
+O IA 192.168.30.0 [110/2] via 200.10.10.1, 00:01:12, GigabitEthernet0/1
+
+R1#show ip ospf neighbor 
+
+
+Neighbor ID     Pri   State           Dead Time   Address         Interface
+2.2.2.2           1   FULL/BDR        00:00:34    200.10.10.2     GigabitEthernet0/1
+
+R1#show ip ospf database 
+            OSPF Router with ID (1.1.1.1) (Process ID 1)
+
+                Router Link States (Area 0)
+
+Link ID         ADV Router      Age         Seq#       Checksum Link count
+1.1.1.1         1.1.1.1         103         0x80000003 0x007a14 1
+2.2.2.2         2.2.2.2         96          0x80000003 0x003c49 1
+
+                Net Link States (Area 0)
+Link ID         ADV Router      Age         Seq#       Checksum
+200.10.10.1     1.1.1.1         103         0x80000001 0x0043c8
+
+                Summary Net Link States (Area 0)
+Link ID         ADV Router      Age         Seq#       Checksum
+192.168.10.0    1.1.1.1         220         0x80000001 0x005591
+192.168.30.0    1.1.1.1         216         0x80000002 0x00765b
+192.168.20.0    1.1.1.1         211         0x80000003 0x00e2f7
+192.168.40.0    2.2.2.2         86          0x80000001 0x00ebd8
+192.168.50.0    2.2.2.2         76          0x80000002 0x007b3e
+192.168.60.0    2.2.2.2         76          0x80000003 0x000ba3
+
+                Router Link States (Area 10)
+
+Link ID         ADV Router      Age         Seq#       Checksum Link count
+1.1.1.1         1.1.1.1         230         0x80000001 0x009641 1
+
+                Summary Net Link States (Area 10)
+Link ID         ADV Router      Age         Seq#       Checksum
+200.10.10.0     1.1.1.1         226         0x80000001 0x004a36
+192.168.30.0    1.1.1.1         216         0x80000002 0x00765b
+192.168.20.0    1.1.1.1         211         0x80000003 0x00e2f7
+192.168.40.0    1.1.1.1         78          0x80000004 0x000eb6
+192.168.50.0    1.1.1.1         68          0x80000005 0x009d1c
+192.168.60.0    1.1.1.1         68          0x80000006 0x002d81
+
+                Router Link States (Area 20)
+
+Link ID         ADV Router      Age         Seq#       Checksum Link count
+1.1.1.1         1.1.1.1         226         0x80000001 0x00f0dc 1
+
+                Summary Net Link States (Area 20)
+Link ID         ADV Router      Age         Seq#       Checksum
+200.10.10.0     1.1.1.1         226         0x80000001 0x004a36
+192.168.10.0    1.1.1.1         221         0x80000002 0x005392
+192.168.30.0    1.1.1.1         216         0x80000003 0x00745c
+192.168.40.0    1.1.1.1         78          0x80000004 0x000eb6
+192.168.50.0    1.1.1.1         68          0x80000005 0x009d1c
+192.168.60.0    1.1.1.1         68          0x80000006 0x002d81
+
+                Router Link States (Area 30)
+
+Link ID         ADV Router      Age         Seq#       Checksum Link count
+1.1.1.1         1.1.1.1         220         0x80000001 0x004b78 1
+
+                Summary Net Link States (Area 30)
+Link ID         ADV Router      Age         Seq#       Checksum
+200.10.10.0     1.1.1.1         220         0x80000001 0x004a36
+192.168.10.0    1.1.1.1         220         0x80000002 0x005392
+192.168.20.0    1.1.1.1         211         0x80000003 0x00e2f7
+192.168.40.0    1.1.1.1         78          0x80000004 0x000eb6
+192.168.50.0    1.1.1.1         68          0x80000005 0x009d1c
+192.168.60.0    1.1.1.1         68          0x80000006 0x002d81
+
+R1#show ip route ospf 
+O IA 192.168.40.0 [110/2] via 200.10.10.2, 00:01:24, GigabitEthernet0/1
+O IA 192.168.50.0 [110/2] via 200.10.10.2, 00:01:14, GigabitEthernet0/1
+O IA 192.168.60.0 [110/2] via 200.10.10.2, 00:01:14, GigabitEthernet0/1
